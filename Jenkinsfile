@@ -25,6 +25,12 @@ pipeline {
       steps {
         echo "continuing with deployment ${APP_VERSION}"
       }
+      
+      post {
+        aborted {
+          echo 'Why didn\'t you push my button?'
+        }
+      }
     }
   }
   environment {
