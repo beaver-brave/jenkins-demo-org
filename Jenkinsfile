@@ -33,12 +33,23 @@ pipeline {
         success {
           echo 'build success!'
         }
-        failure {}
-        unstable {}
-        changed {}
-        regression {}
-        fixed {}
+        failure {
+          echo 'failure'
+        }
+        unstable {
+          echo 'unstable'
+        }
+        changed {
+          echo 'changed'
+        }
+        regression {
+          echo 'regression'
+        }
+        fixed {
+          echo 'fixed'
+        }
         cleanup {
+          echo 'cleanup'
         }
         
       }
