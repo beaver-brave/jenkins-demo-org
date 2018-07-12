@@ -46,7 +46,7 @@ pipeline {
     }
     stage('Say Kernel') {
       steps {
-        echo "${KERNEL VERSION}"
+        echo "${KERNEL_VERSION}"
       }
     }
   }
