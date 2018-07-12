@@ -14,7 +14,7 @@ pipeline {
   }
   environment {
     MY_NAME = 'Beaver'
-    TEST_USER = credentials('test-user')
+    TEST_USER = credentials('test_user')
   }
   parameters {
     string(name: 'Name', defaultValue: 'whoever you are', description: 'who should I say hi to?')
