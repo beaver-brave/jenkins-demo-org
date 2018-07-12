@@ -11,16 +11,28 @@ pipeline {
         sh 'java -version'
       }
     }
-    stage('Deploy') {
-      input {
-        message 'Should we continue?'
-        ok "Deploy"
-        parameters {
-          choice(name: 'APP_VERSION', choices: "v1.1\nv1.2\nv1.3", description: 'what to deploy?')
+    stage('Testing') {
+      failFast true
+      parallel {
+        stage("Java 8") {
+          agent { label 'jdk8' }
+          steps {
+            sh 'java -version'
+            sleep time: 10, unit: 'SECONDS'
+          }
+        }
+        stage("Java 9") {
+          agent { label 'jdk9' }
+          steps {
+            sh 'java -version'
+            sleep time: 20, unit: 'SECONDS'
+          }
         }
       }
+    }
+    stage('Deploy') {
       steps {
-        echo "continuing with deployment ${APP_VERSION}"
+        echo "continuing with deployment"
       }
       
       post {
@@ -50,8 +62,5 @@ pipeline {
   environment {
     MY_NAME = 'Beaver'
     TEST_USER = credentials('test-user')
-  }
-  parameters {
-    string(name: 'Name', defaultValue: 'whoever you are', description: 'who should I say hi to?')
   }
 }
