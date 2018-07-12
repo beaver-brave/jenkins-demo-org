@@ -17,14 +17,13 @@ pipeline {
       }
       input {
         message 'Should we continue?'
+        ok "Deploy"
+        parameters {
+          choice(name: 'APP_VERSION', choices: "v1.1\nv1.2\nv1.3", description: 'what to deploy?')
+        }
       }
       steps {
-        sleep(time: 5, unit: 'SECONDS')
-        retry(count: 3) {
-          echo 'retry...'
-        }
-
-        echo 'continuing with deployment'
+        echo 'continuing with deployment ${APP_VERSION}'
       }
     }
   }
