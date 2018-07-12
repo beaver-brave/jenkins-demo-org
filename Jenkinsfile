@@ -16,6 +16,7 @@ pipeline {
         message 'Should we continue?'
       }
       steps {
+        sleep(time: 5, unit: 'SECONDS')
         echo 'continuing with deployment'
       }
     }
