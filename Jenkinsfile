@@ -30,6 +30,17 @@ pipeline {
         aborted {
           echo 'Why didn\'t you push my button?'
         }
+        success {
+          echo 'build success!'
+        }
+        failure {}
+        unstable {}
+        changed {}
+        regression {}
+        fixed {}
+        cleanup {
+        }
+        
       }
     }
   }
