@@ -12,18 +12,21 @@ pipeline {
       }
     }
     stage('Testing') {
-      failFast true
       parallel {
         stage("Java 8") {
           agent { label 'jdk8' }
           steps {
-            sh 'java -version'
+            container('maven9') {
+              sh 'mvn -v'
+            }
           }
         }
         stage("Java 9") {
           agent { label 'jdk9' }
           steps {
-            sh 'java -version'
+            container('maven8') {
+              sh 'mvn -v'
+            }
           }
         }
       }
