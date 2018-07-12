@@ -11,6 +11,14 @@ pipeline {
         sh 'java -version'
       }
     }
+    stage('Deploy') {
+      input {
+        message 'Should we continue?'
+      }
+      steps {
+        echo 'continuing with deployment'
+      }
+    }
   }
   environment {
     MY_NAME = 'Beaver'
