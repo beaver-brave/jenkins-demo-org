@@ -30,28 +30,23 @@ pipeline {
         aborted {
           echo 'Why didn\'t you push my button?'
         }
-        success {
-          echo 'build success!'
+      }    
+    }
+    stage('Get Kernel') {
+      steps {
+        script {
+          try {
+            KERNEL_VERSION = sh (script: "uname -r", returnStdout: true)
+          } catch(err) {
+            echo "CAUGHT ERROR: ${err}"
+            throw err
+          }
         }
-        failure {
-          echo 'failure'
-        }
-        unstable {
-          echo 'unstable'
-        }
-        changed {
-          echo 'changed'
-        }
-        regression {
-          echo 'regression'
-        }
-        fixed {
-          echo 'fixed'
-        }
-        cleanup {
-          echo 'cleanup'
-        }
-        
+      }
+    }
+    stage('Say Kernel') {
+      steps {
+        echo "${KERNEL VERSION}"
       }
     }
   }
